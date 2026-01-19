@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Offline Translator - NLLB</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=1.1">
     <!-- Using Google Fonts via standard link -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,6 +22,13 @@
             </div>
             <div class="header-actions">
                 <div id="translation-status" class="status-indicator">Ready</div>
+                <div class="verified-mode-toggle">
+                    <label class="switch">
+                        <input type="checkbox" id="verified-mode">
+                        <span class="slider round"></span>
+                    </label>
+                    <span class="toggle-label">Mode Verificat (Zisk)</span>
+                </div>
                 <button id="theme-toggle" class="icon-button" title="Toggle Dark Mode">
                     <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -43,7 +50,7 @@
             <div class="panel-section">
                 <div class="language-bar">
                     <div class="language-selectors" id="src-langs">
-                        <button class="lang-btn active" data-value="cat_Latn">Catalan</button>
+                        <button class="lang-btn active" data-value="cat_Latn">Català</button>
                         <button class="lang-btn" data-value="spa_Latn">Spanish</button>
                         <button class="lang-btn" data-value="eng_Latn">English</button>
                     </div>
@@ -79,12 +86,13 @@
             <!-- Target Panel -->
             <div class="panel-section">
                 <div class="language-bar">
-                    <div class="language-selectors" id="tgt-langs">
-                        <button class="lang-btn" data-value="cat_Latn">Catalan</button>
+                    <div id="tgt-langs" class="language-selectors">
+                        <button class="lang-btn" data-value="cat_Latn">Català</button>
                         <button class="lang-btn" data-value="spa_Latn">Spanish</button>
                         <button class="lang-btn active" data-value="eng_Latn">English</button>
                     </div>
                 </div>
+                <div id="trust-seal-container"></div>
                 <div class="textarea-container readonly">
                     <div id="target-text-container">
                         <p id="target-text" class="placeholder">Translation will appear here</p>
@@ -110,7 +118,39 @@
         </footer>
     </div>
 
-    <script src="app.js"></script>
+    <!-- Verification Modal -->
+    <div id="verify-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Verificar Autenticitat</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Text Original</label>
+                    <textarea id="verify-src" placeholder="Pega el texto original..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Traducció</label>
+                    <textarea id="verify-tgt" placeholder="Pega la traducción..."></textarea>
+                </div>
+                <div class="form-group">
+                    <div class="label-with-action">
+                        <label>Prova / Certificada (JSON)</label>
+                        <label for="proof-file-input" class="action-link">Pujar Arxiu</label>
+                    </div>
+                    <textarea id="verify-proof" placeholder="Pega el certificado JSON..."></textarea>
+                    <input type="file" id="proof-file-input" accept=".json" style="display: none;">
+                </div>
+                <div id="verify-result" class="verify-result-box"></div>
+            </div>
+            <div class="modal-footer">
+                <button id="verify-submit-btn" class="primary-button">Verificar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js?v=1.1"></script>
 </body>
 
 </html>
