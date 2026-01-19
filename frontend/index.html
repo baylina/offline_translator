@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline Translator - NLLB</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Using Google Fonts via standard link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <span class="logo-text">Offline</span>
+                <span class="logo-accent">Translate</span>
+            </div>
+            <div class="header-actions">
+                <div id="translation-status" class="status-indicator">Ready</div>
+                <button id="theme-toggle" class="icon-button" title="Toggle Dark Mode">
+                    <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <main class="translator-grid">
+            <!-- Source Panel -->
+            <div class="panel-section">
+                <div class="language-bar">
+                    <div class="language-selectors" id="src-langs">
+                        <button class="lang-btn active" data-value="cat_Latn">Catalan</button>
+                        <button class="lang-btn" data-value="spa_Latn">Spanish</button>
+                        <button class="lang-btn" data-value="eng_Latn">English</button>
+                    </div>
+                </div>
+                <div class="textarea-container">
+                    <textarea id="source-text" placeholder="Type to translate..." maxlength="5000"></textarea>
+                    <div class="textarea-footer">
+                        <span id="char-count">0 / 5000</span>
+                        <div class="footer-actions">
+                            <button id="clear-text" class="icon-button" title="Clear Text">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </button>
+                            <button id="translate-btn" class="primary-button">Traduir</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="swap-divider">
+                <button id="swap-languages" class="icon-button" title="Swap Languages">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 1l4 4-4 4"></path>
+                        <path d="M3 5h18"></path>
+                        <path d="M7 23l-4-4 4-4"></path>
+                        <path d="M21 19H3"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Target Panel -->
+            <div class="panel-section">
+                <div class="language-bar">
+                    <div class="language-selectors" id="tgt-langs">
+                        <button class="lang-btn" data-value="cat_Latn">Catalan</button>
+                        <button class="lang-btn" data-value="spa_Latn">Spanish</button>
+                        <button class="lang-btn active" data-value="eng_Latn">English</button>
+                    </div>
+                </div>
+                <div class="textarea-container readonly">
+                    <div id="target-text-container">
+                        <p id="target-text" class="placeholder">Translation will appear here</p>
+                    </div>
+                    <div class="textarea-footer">
+                        <span id="execution-time"></span>
+                        <button id="copy-text" class="icon-button" title="Copy Translation">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+
+        <footer>
+            <div class="footer-credit">
+                Powered by NLLB-200-600M (running locally on Coni's Mac Book Air - Apple M2, 16GB RAM)
+            </div>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
